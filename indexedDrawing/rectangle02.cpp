@@ -69,7 +69,7 @@ int main(int argc, char** argv)
 		0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f,  // 2
 		0.0f, -0.5f, 0.0f, 1.0f, 1.0f, 0.0f  // 3
 	};
-	GLshort indices[] = {
+	GLushort indices[] = {
 		0, 1, 2,  // 第一个三角形
 		0, 3, 1   // 第二个三角形
 	};
