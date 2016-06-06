@@ -1,5 +1,3 @@
-在Github中数学公式无法渲染，可以到[我的博客](http://blog.csdn.net/wangdingqiaoit/article/details/51531002)查看全文。
-
 写在前面
     前面为本节内容准备了[向量和矩阵](http://blog.csdn.net/wangdingqiaoit/article/details/51383052)、[线性变换](http://blog.csdn.net/wangdingqiaoit/article/details/51394238)等内容，本节开始学习OpenGL中的坐标处理。OpenGL中的坐标处理过程包括模型变换、视变换、投影变换、视口变换等内容，这个主题的内容有些多，因此分节学习，主题将分为5节内容来学习。本节主要学习模型变换。本节示例代码均可在[我的github](https://github.com/wangdingqiao/noteForOpenGL/tree/master/modelTransformation)处下载。
 
@@ -13,7 +11,7 @@
 OpenGL中的坐标处理包括模型变换、视变换、投影变换、视口变换等内容，具体过程如下图1所示:
 
 ![坐标变换](http://img.blog.csdn.net/20140918202127843)
-每一个过程处理都有其原因，这里会在另外一篇文章中详述。
+每一个过程处理都有其原因，这些内容计划将会在不同节里分别介绍，最后再整体把握一遍。
 **今天我们学习第一个阶段——模型变换。**
 
 ----
@@ -271,7 +269,56 @@ glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
 ```
 上图中，第三象限为以xy轴同时反射形成，缩放因子为(-1.0,-1.0,1.0)；第四象限为以x轴进行反射，缩放因子为(1.0, -1.0, 1.0)。
 
-----
 
+----
+## 应用变换的顺序问题
+前面提到过由于矩阵乘法不满足交换律，即$AB \neq BA$，因此变换的顺序会影响最终结果。例如下面图中（来自[World, View and Projection Transformation Matrices](http://www.codinglabs.net/article_world_view_projection_matrix.aspx)），上面部分所示为先绕着+y轴旋转90度，然后沿着x轴平移后的效果；下面部分所示，为先沿着X轴平移，然后绕着+y轴旋转90度后的效果。这两者的结果是不同的。
+![变换顺序](http://img.blog.csdn.net/20160606121400803)
+假设茶壶嘴的接口上一点坐标原始为$p=（1,0,0,1）$，沿着x轴平移部分为2个单位。
+则图中上半部分执行过程为：
+**Step1** ： 先绕着+y轴旋转90度，
+$$\begin{align} p' &= Rp \\
+&=\begin{bmatrix} 0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 \\
+-1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix} * \begin{bmatrix} 1 \\ 0 \\ 0 \\ 1\end{bmatrix} \\
+&= \begin{bmatrix} 0 \\ 0 \\ -1 \\ 1\end{bmatrix}
+\end{align}$$
+**Step2** ： 沿着x轴平移2个单位，
+$$\begin{align} p'' &= Tp' \\
+&=\begin{bmatrix} 1 & 0 & 0 & 2 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix} * \begin{bmatrix} 0 \\ 0 \\ -1 \\ 1\end{bmatrix} \\
+&= \begin{bmatrix} 2 \\ 0 \\ -1 \\ 1\end{bmatrix}
+\end{align}$$
+得到最终点p结果为(2,0,-1,1)。
+
+而则图中下半部分执行过程为：
+
+**Step1** ： 先沿着x轴平移2个单位，
+$$\begin{align} p' &= Tp \\
+&=\begin{bmatrix} 1 & 0 & 0 & 2 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix} * \begin{bmatrix} 1 \\ 0 \\ 0 \\ 1\end{bmatrix} \\
+&= \begin{bmatrix} 3 \\ 0 \\ 0 \\ 1\end{bmatrix}
+\end{align}$$
+**Step2** ： 再绕着+y轴旋转90度，
+$$\begin{align} p'' &= Rp' \\
+&=\begin{bmatrix} 0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 \\
+-1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix} * \begin{bmatrix} 3 \\ 0 \\ 0 \\ 1\end{bmatrix} \\
+&= \begin{bmatrix} 0 \\ 0 \\ -3 \\ 1\end{bmatrix}
+\end{align}$$
+得到最终点p结果为(0,0,-3,1)。
+可以看到执行顺序不同，应用相同的变换矩阵，结果是不一样的。导致结果不同的原因在于，图中上半部分在绕着+y轴旋转90度后，茶壶的x轴发生变化，而应用变换矩阵时沿着的x轴是全局的，是之前的x轴，而不是变换后的x轴，因此导致两者结果不一样。这一点需要引起注意。
+
+----
 ## 最后说明
 上面讨论的模型变换部分涉及到了平移、缩放、旋转和镜像变换，在实际中多半是这些变换的组合，一般地执行变换顺序为缩放--》旋转---》平移。在实行模型变换时，要注意变换的顺序和代码中书写的顺序相反。同时对于缩放和旋转变换，要注意不动点不在原点时的处理方法。对于绕任意方向的旋转，需要推导一个新的旋转矩阵，这个内容会放在数学相关的小节介绍。
