@@ -346,6 +346,22 @@ void main()
 $ y = a +(b-a)*t$
 来生成颜色。当t=0时，取值为a表示颜色为红色，t=1时取值为b表示为绿色，当t取值在0和1之间时，则按照比例混合红色和绿色生成最终的颜色。上图中除了顶点以外的颜色，其余部分都是通过颜色插值得来的。颜色插值理论后面还要深入了解。
 
+## 使用模板快速获取本节工程
+有网友留言索要整个工程，因为github上面上传二进制的VS工程不太合适，这里制作了一个方便的模板供使用，可以从[我的github下载](https://github.com/wangdingqiao/noteForOpenGL/tree/master/getting-started-template)。模板使用方法：
+
+**Step1**: 将模板getting-started.zip拷贝值VS的项目模板目录，如下图所示：
+![安装模板](http://img.blog.csdn.net/20160709103324246)
+
+
+**Step2**: 使用模板新建工程，如下图：
+
+![新建工程](http://img.blog.csdn.net/20160709103402880)
+
+**Step3**: 将libraries拷贝至新建项目的同级目录下。
+![拷贝libraries](http://img.blog.csdn.net/20160709103245051)
+
+**Step4**: 编译运行新建工程即可。
+
 ## 了解更多
 1. 着色器编译和链接 [Shader Compilation](https://www.opengl.org/wiki/Shader_Compilation)
 2. VAO和VBO 等缓存对象 [Buffer Objects Advanced](http://www.informit.com/articles/article.aspx?p=1377833&seqNum=7)
