@@ -215,6 +215,22 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 这里我们没有绘制任何内容，在[下一节](http://blog.csdn.net/wangdingqiaoit/article/details/51318793)将会绘制我们的第一个图形。
 
+## 使用模板快速获取本节工程
+有网友留言索要整个工程，因为github上面上传二进制的VS工程不太合适，这里制作了一个方便的模板供使用，可以从[我的github下载](https://github.com/wangdingqiao/noteForOpenGL/tree/master/getting-started-template)。模板使用方法：
+
+**Step1**: 将模板getting-started.zip拷贝值VS的项目模板目录，如下图所示：
+![安装模板](http://img.blog.csdn.net/20160709103324246)
+
+
+**Step2**: 使用模板新建工程，如下图：
+
+![新建工程](http://img.blog.csdn.net/20160709103402880)
+
+**Step3**: 将libraries拷贝至新建项目的同级目录下。
+![拷贝libraries](http://img.blog.csdn.net/20160709103245051)
+
+**Step4**: 编译运行新建工程即可。
+
 ##推荐阅读:
 [1]: [OpenGL wikipedia](https://en.wikipedia.org/wiki/OpenGL)
 [2]: [Don't use old OpenGL](https://kos.gd/posts/dont-use-old-opengl/)
