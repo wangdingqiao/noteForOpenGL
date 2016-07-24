@@ -40,7 +40,7 @@ bool firstMouseMove = true;
 bool keyPressedStatus[1024]; // 按键情况记录
 GLfloat deltaTime = 0.0f; // 当前帧和上一帧的时间差
 GLfloat lastFrame = 0.0f; // 上一帧时间
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera camera(glm::vec3(0.0f, 1.0f, 3.0f));
 
 int main(int argc, char** argv)
 {
@@ -95,9 +95,26 @@ int main(int argc, char** argv)
 	// 设置视口参数
 	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	
-	//Section1 加载模型数据
+	//Section1 加载模型数据 为了方便更换模型 我们从文件读取模型文件路径
 	Model objModel;
-	if (!objModel.loadModel("../../resources/models/nanosuit/nanosuit.obj"))
+	std::ifstream modelPath("modelPath.txt");
+	if (!modelPath)
+	{
+		std::cerr << "Error::could not read model path file." << std::endl;
+		glfwTerminate();
+		std::system("pause");
+		return -1;
+	}
+	std::string modelFilePath;
+	std::getline(modelPath, modelFilePath);
+	if (modelFilePath.empty())
+	{
+		std::cerr << "Error::model path empty." << std::endl;
+		glfwTerminate();
+		std::system("pause");
+		return -1;
+	}
+	if (!objModel.loadModel(modelFilePath))
 	{
 		glfwTerminate();
 		std::system("pause");
@@ -124,14 +141,14 @@ int main(int argc, char** argv)
 		shader.use();
 
 		glm::mat4 projection = glm::perspective(camera.mouse_zoom,
-			(GLfloat)(WINDOW_WIDTH) / WINDOW_HEIGHT, 1.0f, 100.0f); // 投影矩阵
+			(GLfloat)(WINDOW_WIDTH) / WINDOW_HEIGHT, 1.0f, 1000.0f); // 投影矩阵
 		glm::mat4 view = camera.getViewMatrix(); // 视变换矩阵
 		glUniformMatrix4fv(glGetUniformLocation(shader.programId, "projection"),
 			1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix4fv(glGetUniformLocation(shader.programId, "view"),
 			1, GL_FALSE, glm::value_ptr(view));
 		glm::mat4 model;
-		model = glm::translate(model, glm::vec3(0.0f, -1.55f, 0.0f)); // 适当下调位置
+		model = glm::translate(model, glm::vec3(0.0f, -1.55f, -1.0f)); // 适当调整位置
 		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f)); // 适当缩小模型
 		glUniformMatrix4fv(glGetUniformLocation(shader.programId, "model"),
 			1, GL_FALSE, glm::value_ptr(model));

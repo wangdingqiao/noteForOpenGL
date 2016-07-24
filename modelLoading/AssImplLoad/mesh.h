@@ -44,6 +44,12 @@ class Mesh
 public:
 	void draw(const Shader& shader) const// 绘制Mesh
 	{
+		if (VAOId == 0 
+			||VBOId == 0 
+			|| EBOId == 0)
+		{
+			return;
+		}
 		shader.use();
 		glBindVertexArray(this->VAOId);
 		int diffuseCnt = 0, specularCnt = 0,texUnitCnt = 0;
@@ -83,10 +89,10 @@ public:
 		glBindVertexArray(0);
 		glUseProgram(0);
 	}
-	Mesh(){}
+	Mesh():VAOId(0), VBOId(0), EBOId(0){}
 	Mesh(const std::vector<Vertex>& vertData, 
 		const std::vector<Texture> & textures,
-		const std::vector<GLuint>& indices) // 构造一个Mesh
+		const std::vector<GLuint>& indices):VAOId(0), VBOId(0), EBOId(0) // 构造一个Mesh
 	{
 		setData(vertData, textures, indices);
 	}
@@ -97,7 +103,10 @@ public:
 		this->vertData = vertData;
 		this->indices = indices;
 		this->textures = textures;
-		this->setupMesh();
+		if (!vertData.empty() && !indices.empty())
+		{
+			this->setupMesh();
+		}
 	}
 	void final() const
 	{
