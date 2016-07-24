@@ -23,13 +23,6 @@ struct Vertex
 	glm::vec3 normal;
 };
 
-// 纹理类型
-enum ETextureType
-{
-	ETextureTypeDiffuse = 1,  // 漫反射
-	ETextureTypeSpecular = 2, // 镜面反射
-};
-
 // 表示一个Texture
 struct Texture
 {
