@@ -177,7 +177,7 @@ bool processMesh(const aiMesh* meshPtr, const aiScene* sceneObjPtr, Mesh& meshOb
 
 这里没有使用光照，下面是实现了一个点光源的效果：
 
-![有光照效果](http://img.blog.csdn.net/20160724163909103)
+![有光照效果](http://img.blog.csdn.net/20160726153834123)
 可以从机器人胸部的高光部分看到，实现光照时的区别。
 
 # 加载海岛模型
