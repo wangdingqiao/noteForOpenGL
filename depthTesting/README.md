@@ -18,9 +18,13 @@
 在绘制3D场景的时候，我们需要决定哪些部分对观察者是可见的，或者说哪些部分对观察者不可见，对于不可见的部分，我们应该及早的丢弃，例如在一个不透明的墙壁后的物体就不应该渲染。这种问题称之为[隐藏面消除](https://en.wikipedia.org/wiki/Hidden_surface_determination)（Hidden surface elimination）,或者称之为找出可见面(Visible surface detemination)。
 
 解决这一问题比较简单的做法是画家算法([painter's algorithm](https://en.wikipedia.org/wiki/Painter%27s_algorithm))。画家算法的基本思路是，先绘制场景中离观察者较远的物体，再绘制较近的物体。例如绘制下面图中的物体(来自[Z buffer 和 W buffer 簡介](https://www.csie.ntu.edu.tw/~r89004/hive/hsr/page_1.html))，先绘制红色部分，再绘制黄色，最后绘制灰色部分，即可解决隐藏面消除问题。
+
 ![画家算法举例](http://img.blog.csdn.net/20160807203914290)
+
 使用画家算法时，只要将场景中物体按照离观察者的距离远近排序，由远及近的绘制即可。画家算法很简单，但另一方面也存在缺陷，例如下面的图中，三个三角形互相重叠的情况，画家算法将无法处理：
+
 ![画家算法失效](http://img.blog.csdn.net/20160807203943775)
+
 解决隐藏面消除问题的算法有很多，具体可以参考[Visible Surface Detection](http://www.tutorialspoint.com/computer_graphics/visible_surface_detection.htm)。结合OpenGL，我们使用的是Z-buffer方法，也叫深度缓冲区Depth-buffer。
 
 深度缓冲区(Detph buffer)同颜色缓冲区(color buffer)是对应的，颜色缓冲区存储的像素的颜色信息，而深度缓冲区存储像素的深度信息。在决定是否绘制一个物体的表面时，首先将表面对应像素的深度值与当前深度缓冲区中的值进行比较，如果大于等于深度缓冲区中值，则丢弃这部分;否则利用这个像素对应的深度值和颜色值，分别更新深度缓冲区和颜色缓冲区。这一过程称之为深度测试(Depth Testing)。在OpenGL中执行深度测试时，我们可以根据需要指定深度值的比较函数，后面会详细介绍具体使用。
