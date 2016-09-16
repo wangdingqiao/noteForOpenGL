@@ -19,23 +19,14 @@ public:
 			internalFormat, picFormat, picDataType, loadChannels);
 		return this->skyBoxTextId != 0;
 	}
-	void draw(const Shader& skyBoxShader , glm::mat4& view, const glm::mat4& projection)
+	void draw(const Shader& skyBoxShader) const
 	{
 		GLint OldDepthFuncMode;
 		glGetIntegerv(GL_DEPTH_FUNC, &OldDepthFuncMode);
 
 		glDepthFunc(GL_LEQUAL);
 		skyBoxShader.use();
-		glm::mat4 viewWithoutTranslate = glm::mat4(glm::mat3(view)); // 视变换矩阵 移除translate部分
-		glUniformMatrix4fv(glGetUniformLocation(skyBoxShader.programId, "projection"),
-			1, GL_FALSE, glm::value_ptr(projection));
-		glUniformMatrix4fv(glGetUniformLocation(skyBoxShader.programId, "view"),
-			1, GL_FALSE, glm::value_ptr(viewWithoutTranslate));
-
 		glBindVertexArray(this->skyBoxVAOId);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, this->skyBoxTextId); // 注意绑定到CUBE_MAP
-		glUniform1i(glGetUniformLocation(skyBoxShader.programId, "skybox"), 0);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glBindVertexArray(0);
@@ -45,6 +36,10 @@ public:
 	{
 		glDeleteVertexArrays(1, &this->skyBoxVAOId);
 		glDeleteBuffers(1, &this->skyBoxVBOId);
+	}
+	GLuint getTextId() const
+	{
+		return this->skyBoxTextId;
 	}
 private:
 	GLuint skyBoxTextId;
