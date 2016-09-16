@@ -215,7 +215,16 @@ int main(int argc, char** argv)
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		// 然后绘制包围盒
-		skybox.draw(skyBoxShader, view, projection);
+		skyBoxShader.use();
+		view = glm::mat4(glm::mat3(camera.getViewMatrix())); // 视变换矩阵 移除translate部分
+		glUniformMatrix4fv(glGetUniformLocation(skyBoxShader.programId, "projection"),
+			1, GL_FALSE, glm::value_ptr(projection));
+		glUniformMatrix4fv(glGetUniformLocation(skyBoxShader.programId, "view"),
+			1, GL_FALSE, glm::value_ptr(view));
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, skybox.getTextId());
+		glUniform1i(glGetUniformLocation(skyBoxShader.programId, "skybox"), 0);
+		skybox.draw(skyBoxShader);
 
 		glBindVertexArray(0);
 		glUseProgram(0);
