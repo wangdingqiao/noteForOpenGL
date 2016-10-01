@@ -1,0 +1,20 @@
+#version 330 core
+
+layout(location = 0) in vec3 position;
+layout(location = 1) in vec3 normal;
+
+
+uniform mat4 model; // 应为模型变换矩阵一般不能共享 所以单独列出来
+
+// 定义UBO
+layout (std140) uniform Matrices
+{
+   mat4 projection;
+   mat4 view;
+};  // 这里没有定义instance name，则在使用时不需要指定instance name
+
+
+void main()
+{
+	gl_Position = projection * view * model * vec4(position, 1.0);
+}
