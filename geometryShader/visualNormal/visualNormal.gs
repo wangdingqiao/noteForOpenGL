@@ -22,7 +22,7 @@ void generateNormalLine(int index)
   EndPrimitive();
 }
 
-// 输出在法向量方向发生偏移的顶点位置 模拟爆炸效果
+// 输出代表法向量的直线
 void main()
 {
 	generateNormalLine(0);
