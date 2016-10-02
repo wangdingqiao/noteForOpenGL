@@ -1,0 +1,25 @@
+#version 330 core
+
+layout(location = 0) in vec3 position;
+layout(location = 1) in vec2 textCoord;
+layout(location = 2) in vec3 normal;
+
+
+uniform mat4 projection;
+uniform mat4 view;
+uniform mat4 model;
+
+// 定义输出interface block
+out VS_OUT
+{
+  vec3 normal;
+}vs_out;
+
+void main()
+{
+	gl_Position = projection * view * model * vec4(position, 1.0);
+	// 注意这里需要向几何着色器 输出裁剪坐标系下(clip space)法向量
+	// 不是世界坐标系或者相机坐标系下的法向量
+	mat3 normalMatrix = mat3(transpose(inverse(view * model)));
+	vs_out.normal = normalize( vec3( projection * vec4(normalMatrix * normal, 1.0) ) ); // 注意再次使用normalize
+}
