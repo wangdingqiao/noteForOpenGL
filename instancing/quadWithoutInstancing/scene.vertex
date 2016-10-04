@@ -1,0 +1,15 @@
+#version 330 core
+
+layout(location = 0) in vec2 position;
+layout(location = 1) in vec3 color;
+
+uniform vec2 offsets[100]; // 每个实例的位移量
+
+out vec3 fColor;
+
+void main()
+{
+	vec2 offset = offsets[gl_InstanceID]; // 通过gl_InstanceID索引每个实例的位移量
+	gl_Position = vec4(position + offset, 0.5f, 1.0f);
+	fColor = color;
+}
