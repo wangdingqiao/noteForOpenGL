@@ -1,0 +1,17 @@
+#version 330 core
+
+layout(location = 0) in vec3 position;
+layout(location = 1) in vec2 textCoord;
+layout(location = 2) in vec3 normal;
+layout(location = 3) in mat4 instanceMatrix;  // GLSL仅支持最多vec4 输入 实际上有4个vec4输入构造这个mat4
+
+uniform mat4 projection;
+uniform mat4 view;
+
+out vec2 TextCoord;
+
+void main()
+{
+	gl_Position = projection * view * instanceMatrix * vec4(position, 1.0);
+	TextCoord = textCoord;
+}
