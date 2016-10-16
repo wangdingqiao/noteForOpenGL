@@ -1,6 +1,6 @@
 # OpenGL学习脚印
 
-[demo picture](http://img.blog.csdn.net/20161004121046497)
+1.[nanosuit model demo](http://img.blog.csdn.net/20161004121046497)
 
 -------
 
