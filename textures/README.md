@@ -281,7 +281,9 @@ void main()
 ```
 其中[texture](https://www.opengl.org/sdk/docs/man/html/texture.xhtml)函数根据纹理坐标，获取纹理对象中的纹素。
 运行程序，效果如下图所示：
-![二维纹理](http://img.blog.csdn.net/20160520154530694)
+
+![二维纹理](http://img.blog.csdn.net/20161029101049012)
+
 这里为绘制的矩形添加了纹理，可以从[我的github](https://github.com/wangdingqiao/noteForOpenGL/tree/master/textures)下载程序完整代码。
 
 ## 重构代码
@@ -295,7 +297,7 @@ GLint textureId = TextureHelper::load2DTexture("wood.png");
 color = texture(tex, TextCoord) * vec4(VertColor, 1.0f);
 ```
 
-![二维纹理与颜色混合](http://img.blog.csdn.net/20160520154717272)
+![二维纹理与颜色混合](http://img.blog.csdn.net/20161029101131263)
 
 
 ## 使用多个纹理单元
@@ -341,7 +343,8 @@ void main()
 mixValue通过程序传递，可以通过键盘上的A和S键，调整纹理混合值，改变混合效果。
 
 运行效果如下:
-![two texture unit](http://img.blog.csdn.net/20160520160546112)
+
+![two texture unit](http://img.blog.csdn.net/20161029101209185)
 
 画面中这只猫是倒立的，主要原因是加载图片时，图片的(0,0)位置一般在左上角，而OpenGL纹理坐标的(0,0)在左下角，这样y轴顺序相反。有的图片加载库提供了相应的选项用来翻转y轴，SOIL没有这个选项。我们可以修改顶点数据中的纹理坐标来达到目的，或者对于我们这里的简单情况使用如下代码实现y轴的翻转:
 ```C++
@@ -351,7 +354,7 @@ vec4 color2 = texture(tex2,
 
 修改后的运行效果如下所示：
 
-![two texture unit mix](http://img.blog.csdn.net/20160520161112635)
+![two texture unit mix](http://img.blog.csdn.net/20161029101248186)
 
 上述程序完整的代码可以从[我的github下载](https://github.com/wangdingqiao/noteForOpenGL/tree/master/textures)。
 
