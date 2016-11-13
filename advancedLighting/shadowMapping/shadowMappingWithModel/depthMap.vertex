@@ -1,0 +1,11 @@
+#version 330 core
+
+layout(location = 0) in vec3 position; // 只需要位置即可确定深度
+
+uniform mat4 lightVPMatrix;
+uniform mat4 model;
+
+void main()
+{
+	gl_Position = lightVPMatrix * model * vec4(position, 1.0);
+}
