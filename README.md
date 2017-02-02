@@ -1,6 +1,13 @@
 # OpenGL学习脚印
 
-1.[nanosuit model demo](http://img.blog.csdn.net/20161004121046497)
+1.[nanosuit load model demo](http://img.blog.csdn.net/20160726153834123)
+2.[enviornment mapping demo](http://img.blog.csdn.net/20160916205649383)
+3.[reflection map demo](http://img.blog.csdn.net/20160916212116711)
+4.[skyBox demo](http://img.blog.csdn.net/20160911220204857)
+5.[nanosuit instancing demo](http://img.blog.csdn.net/20161004121046497)
+6.[gamma correction demo](http://img.blog.csdn.net/20161030211057020)
+7.[shadow mapping demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/advancedLighting/pointShadow/%E7%82%B9%E5%85%89%E6%BA%90%E9%98%B4%E5%BD%B1%E6%95%88%E6%9E%9C2.png?raw=true)
+8.[normal mapping demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/advancedLighting/normalMapping/compare-model.png?raw=true)
 
 -------
 
