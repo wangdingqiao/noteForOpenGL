@@ -1,0 +1,49 @@
+#version 330
+
+layout(location = 0) in vec3 position;
+layout(location = 1) in vec2 textCoord;
+layout(location = 2) in vec3 normal;
+layout(location = 3) in vec3 tangent;    // 新加的Tangent向量
+
+// 定义输出interface block
+out VS_OUT
+{
+	vec3 FragPos;
+	vec2 TextCoord;
+	vec3 FragNormal; // 保留这个用于对比方法的效果
+	// 统一转换到tangent space计算
+	vec3 TangentLightPos;
+    vec3 TangentViewPos;
+    vec3 TangentFragPos;
+}vs_out;
+
+
+uniform mat4 projection;
+uniform mat4 view;
+uniform mat4 model;
+// 用于转换到TBN space
+uniform vec3 lightPos;
+uniform vec3 viewPos;
+
+void main()
+{
+	gl_Position = projection * view * model * vec4(position, 1.0);
+	vs_out.FragPos = vec3(model * vec4(position, 1.0)); // 在世界坐标系中指定片元位置
+	vs_out.TextCoord = textCoord;
+
+	mat3 normalMatrix = transpose(inverse(mat3(model)));
+	vs_out.FragNormal = normalMatrix * normal; // 计算法向量经过模型变换后值
+	// 施密特正交变换 TBN向量
+	vec3 T = normalize(normalMatrix * tangent);
+	vec3 N = normalize(normalMatrix * normal);
+	T = normalize(T - dot(T, N) * N);
+	vec3 B = cross(N, T); 
+
+	// 利用TBN逆矩阵 将世界坐标系中坐标转换到TBN坐标系
+    mat3 TBN = transpose(mat3(T, B, N));
+    vs_out.TangentLightPos = TBN * lightPos;
+    vs_out.TangentViewPos  = TBN * viewPos;
+    vs_out.TangentFragPos  = TBN * vs_out.FragPos;
+
+	vs_out.FragNormal = TBN * vs_out.FragNormal; // 将法向量也转换到TBN坐标系
+}
