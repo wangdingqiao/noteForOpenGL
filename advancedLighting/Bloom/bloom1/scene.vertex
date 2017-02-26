@@ -1,0 +1,28 @@
+#version 330
+
+layout(location = 0) in vec3 position;
+layout(location = 1) in vec3 normal;
+layout(location = 2) in vec2 textCoord;
+
+// 定义输出interface block
+out VS_OUT
+{
+	vec3 FragPos;
+	vec2 TextCoord;
+	vec3 FragNormal;
+}vs_out;
+
+
+uniform mat4 projection;
+uniform mat4 view;
+uniform mat4 model;
+
+void main()
+{
+	gl_Position = projection * view * model * vec4(position, 1.0);
+	vs_out.FragPos = vec3(model * vec4(position, 1.0)); // 在世界坐标系中指定片元位置
+	vs_out.TextCoord = textCoord;
+	// 计算法向量经过模型变换后值
+	mat3 normalMatrix = mat3(transpose(inverse(model)));
+	vs_out.FragNormal = normalize(normalMatrix * normal);
+}
