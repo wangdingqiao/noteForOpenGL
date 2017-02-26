@@ -109,7 +109,7 @@ int main(int argc, char** argv)
 	prepareHDRFBO(HDRFBOId, HDRTextId);
 
 	// Section2 加载纹理
-	sceneTextId = TextureHelper::load2DTexture("../../resources/textures/wood.png");
+	sceneTextId = TextureHelper::load2DTexture("../../resources/textures/wood.png", GL_SRGB); // 使用线性颜色空间的纹理
 
 	// Section3 准备着色器程序
 	Shader shader("scene.vertex", "scene.frag");
