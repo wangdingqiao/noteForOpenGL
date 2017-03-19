@@ -1,14 +1,15 @@
 # OpenGL学习脚印
 
-- [nanosuit load model demo](http://img.blog.csdn.net/20160726153834123)
-- [enviornment mapping demo](http://img.blog.csdn.net/20160916205649383)
-- [reflection map demo](http://img.blog.csdn.net/20160916212116711)
-- [skyBox demo](http://img.blog.csdn.net/20160911220204857)
-- [nanosuit instancing demo](http://img.blog.csdn.net/20161004121046497)
-- [gamma correction demo](http://img.blog.csdn.net/20161030211057020)
-- [shadow mapping demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/advancedLighting/pointShadow/%E7%82%B9%E5%85%89%E6%BA%90%E9%98%B4%E5%BD%B1%E6%95%88%E6%9E%9C2.png?raw=true)
-- [normal mapping demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/advancedLighting/normalMapping/compare-model.png?raw=true)
-
+- [nanosuit load model demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/modelLoading/%E6%9C%89%E5%85%89%E7%85%A7%E5%8A%A0%E8%BD%BD%E7%9A%84%E6%A8%A1%E5%9E%8B.png)
+- [enviornment mapping demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/environmentMapping/reflection-sphere.png)
+- [reflection map demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/environmentMapping/reflectionMap-combine.png)
+- [skyBox demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/skyBox/skybox2.png)
+- [nanosuit instancing demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/instancing/441%E4%B8%AAnanosuit.png)
+- [planar reflection demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/stencilTesting/plannrRelection.png)
+- [gamma correction demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/gammaCorrection/%E7%BA%B9%E7%90%86%E5%92%8C%E7%9D%80%E8%89%B2%E5%99%A8%E7%BA%BF%E6%80%A7%E5%AF%B9%E6%AF%94%E6%95%88%E6%9E%9C.png)
+- [point shadow mapping demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/advancedLighting/pointShadow/%E7%82%B9%E5%85%89%E6%BA%90%E9%98%B4%E5%BD%B1%E6%95%88%E6%9E%9C2.png)
+- [normal mapping demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/advancedLighting/normalMapping/compare-model.png)
+- [Hello World Text Rendering Demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/textRendering/textEffect.png)
 -------
 
 # 致谢
