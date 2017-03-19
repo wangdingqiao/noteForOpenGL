@@ -1,0 +1,2 @@
+需要安装FreeType library， https://www.freetype.org/
+使用方法见： https://www.freetype.org/freetype2/docs/documentation.html
