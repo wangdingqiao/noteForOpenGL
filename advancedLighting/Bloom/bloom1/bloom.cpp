@@ -121,23 +121,6 @@ int main(int argc, char** argv)
 		std::cin >> waitKey;
 		return -1;
 	}
-	// 绑定depth buffer
-	GLuint rboDepth;
-	glGenRenderbuffers(1, &rboDepth);
-	glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, WINDOW_WIDTH, WINDOW_HEIGHT);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
-	// 要显式告知OpenGL用于渲染的color buffer
-	GLuint attachments[2] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
-	glDrawBuffers(2, attachments);
-	// 检查构建是否成功
-	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-	{
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		return -1;
-	}
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
 	if (!prepareBlurFBO(BlurFBOIds, BlurTextIds, FBO_CNT))
 	{
 		std::cerr << "prepare hdr blur failed." << std::endl;
