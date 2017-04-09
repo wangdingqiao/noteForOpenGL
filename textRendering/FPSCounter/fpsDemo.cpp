@@ -188,7 +188,7 @@ int main(int argc, char** argv)
 		GLfloat yPos = WINDOW_HEIGHT / 2.0f + yOffset;
 		fpsCounter.frames++;
 		double now = glfwGetTime();
-		if (now - fpsCounter.lastFrameTime > 1.0)
+		if (now - fpsCounter.lastFrameTime >= 1.0)
 		{
 			fpsStr = fpsCounter.getFramePerSecondsAsString();
 			fpsCounter.resetCounter(now);
