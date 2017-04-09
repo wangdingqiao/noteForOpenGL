@@ -10,6 +10,7 @@
 - [point shadow mapping demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/advancedLighting/pointShadow/%E7%82%B9%E5%85%89%E6%BA%90%E9%98%B4%E5%BD%B1%E6%95%88%E6%9E%9C2.png)
 - [normal mapping demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/advancedLighting/normalMapping/compare-model.png)
 - [Hello World Text Rendering Demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/textRendering/textEffect.png)
+- [frame rate counter Demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/textRendering/fps.png)
 -------
 
 # 致谢
