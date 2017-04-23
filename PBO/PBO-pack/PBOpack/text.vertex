@@ -1,0 +1,15 @@
+#version 330
+
+layout(location = 0) in vec4 vertext;  // xy表示位置 zw表示纹理坐标
+
+uniform mat4 projection;
+uniform mat4 view;
+uniform mat4 model;
+
+out vec2 TextCoord;
+
+void main()
+{
+	gl_Position = projection * view * model * vec4(vertext.xy, 0.0, 1.0);
+	TextCoord = vertext.zw;
+}
